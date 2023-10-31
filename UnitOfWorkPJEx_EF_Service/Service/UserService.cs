@@ -21,10 +21,11 @@ namespace UnitOfWorkPJEx_EF_Service.Service
         {
             if (UserId > 0)
             {
-                var User = _unitOfWork.Users.GetById(UserId);
-                if (User != null)
+                var Userlist = _unitOfWork.Users.Get(x=>x.UserId== UserId);
+                var user = Userlist.SingleOrDefault();
+                if (user != null)
                 {
-                    return User;
+                    return user;
                 }
             }
             return null;
@@ -65,7 +66,7 @@ namespace UnitOfWorkPJEx_EF_Service.Service
         {
             if (UserId > 0)
             {
-                var user = _unitOfWork.Users.GetById(UserId);
+                var user = _unitOfWork.Users.Get(x=>x.UserId== UserId).FirstOrDefault();
                 if (user != null)
                 {
                     _unitOfWork.Users.Delete(user);
